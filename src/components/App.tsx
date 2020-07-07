@@ -1,14 +1,14 @@
-import React, { useReducer, useContext, createContext } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useReducer, useContext, createContext } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import reducer, {
   stateType,
   eventStateType,
   initialEventState,
   actionType,
-} from '../reducers/events';
-import EventForm from './eventform';
+} from "../reducers/events";
+import EventForm from "./eventform";
 // import AppContext, { initialState } from '../contexts/AppContext';
-import EventList from './events';
+import EventList from "./events";
 
 export const EventContext = createContext<{
   state: eventStateType;

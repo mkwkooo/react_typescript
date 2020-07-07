@@ -1,10 +1,19 @@
-import React, { useContext } from 'react';
-import { stateType } from '../reducers/events';
-import { EventContext } from './App';
+import React, { useContext } from "react";
+import { stateType } from "../reducers/events";
+import { EventContext } from "./App";
+import { DELETE_EVENT } from "../actions/action";
 
 const Event: ({ event }: { event: stateType }) => JSX.Element = ({ event }) => {
   const { dispatch } = useContext(EventContext);
-  const deleteEvent = () => {};
+  const id = event.id;
+  const deleteEvent = () => {
+    const result = window.confirm(
+      `イベント(id=${id})を本当に削除しても良いですか？`
+    );
+    if (result) {
+      dispatch({ type: DELETE_EVENT, id });
+    }
+  };
 
   return (
     <tr>

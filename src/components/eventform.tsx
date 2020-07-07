@@ -1,14 +1,14 @@
-import React, { useReducer, useState, useContext } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import AppContext from '../contexts/AppContext';
-import reducer, { actionType, stateType } from '../reducers/events';
-import { CREATE_EVENT } from '../actions/action';
-import { EventContext } from './App';
+import React, { useReducer, useState, useContext } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import AppContext from "../contexts/AppContext";
+import reducer, { actionType, stateType } from "../reducers/events";
+import { CREATE_EVENT } from "../actions/action";
+import { EventContext } from "./App";
 
 const EventForm = () => {
   const { state, dispatch } = useContext(EventContext);
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
 
   const addEvent = (
     e:
@@ -21,10 +21,10 @@ const EventForm = () => {
       title,
       body,
     });
-    setTitle('');
-    setBody('');
+    setTitle("");
+    setBody("");
   };
-  const createButton = title === '' || body === '' ? true : false;
+  const createButton = title === "" || body === "" ? true : false;
 
   return (
     <div>
