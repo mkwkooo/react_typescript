@@ -1,29 +1,32 @@
-import React, { useReducer, useContext, createContext } from "react";
+import React, { useReducer } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import reducer, {
-  stateType,
-  eventStateType,
-  initialEventState,
-  actionType,
-} from "../reducers/events";
+import eventReducer, { initialEventState } from "../reducers/events_reducer";
+
+import operationReducer, {
+  operationLogType,
+  OperationLogAction,
+  initialOperationState,
+} from "../reducers/operationlogs_reducer";
+
 import EventForm from "./eventform";
-// import AppContext, { initialState } from '../contexts/AppContext';
 import EventList from "./events";
+import OperationLogs from "./OperationLogs";
 
-export const EventContext = createContext<{
-  state: eventStateType;
-  dispatch: (action: actionType) => void;
-}>({ state: initialEventState, dispatch: () => {} });
-
-const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialEventState);
-
+const App: React.FC = () => {
+  const [events, eventsDispatch] = useReducer(eventReducer, initialEventState);
+  const [operationLogs, operationLogsDispatch] = useReducer(
+    operationReducer,
+    initialOperationState
+  );
   return (
     <div className="container-fluid">
-      <EventContext.Provider value={{ state, dispatch }}>
-        <EventForm></EventForm>
-        <EventList></EventList>
-      </EventContext.Provider>
+      <EventForm
+        values={events}
+        eventsDispatch={eventsDispatch}
+        operationLogsDispatch={operationLogsDispatch}
+      ></EventForm>
+      <EventList values={events} dispatch={eventsDispatch}></EventList>
+      <OperationLogs values={operationLogs}></OperationLogs>
     </div>
   );
 };
